@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/flori/OneDrive/Bureau/mlflow%20test/mlruns/0/24f7f560b81f4703bdb661566511f70b/artifacts
+end_time: 1726648212227
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 24f7f560b81f4703bdb661566511f70b
+run_name: suave-shoat-948
+run_uuid: 24f7f560b81f4703bdb661566511f70b
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1726648209100
+status: 3
+tags: []
+user_id: flori

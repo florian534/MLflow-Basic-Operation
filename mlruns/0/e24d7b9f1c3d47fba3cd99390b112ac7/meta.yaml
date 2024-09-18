@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/flori/OneDrive/Bureau/mlflow%20test/mlruns/0/e24d7b9f1c3d47fba3cd99390b112ac7/artifacts
+end_time: 1726647924279
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: e24d7b9f1c3d47fba3cd99390b112ac7
+run_name: salty-jay-412
+run_uuid: e24d7b9f1c3d47fba3cd99390b112ac7
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1726647920733
+status: 3
+tags: []
+user_id: flori
