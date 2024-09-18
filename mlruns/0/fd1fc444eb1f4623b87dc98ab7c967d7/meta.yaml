@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/flori/OneDrive/Bureau/mlflow%20test/mlruns/0/fd1fc444eb1f4623b87dc98ab7c967d7/artifacts
+end_time: 1726659462525
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: fd1fc444eb1f4623b87dc98ab7c967d7
+run_name: smiling-squirrel-780
+run_uuid: fd1fc444eb1f4623b87dc98ab7c967d7
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1726659458622
+status: 3
+tags: []
+user_id: flori
