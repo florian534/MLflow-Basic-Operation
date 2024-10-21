@@ -1,10 +1,7 @@
-# The data set used in this example is from http://archive.ics.uci.edu/ml/datasets/Wine+Quality
-# P. Cortez, A. Cerdeira, F. Almeida, T. Matos and J. Reis.
-# Modeling wine preferences by data mining from physicochemical properties. In Decision Support Systems, Elsevier, 47(4):547-553, 2009.
-
 import logging
 import sys
 import warnings
+import os
 from urllib.parse import urlparse
 
 import numpy as np
@@ -12,6 +9,7 @@ import pandas as pd
 from sklearn.linear_model import ElasticNet
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from sklearn.model_selection import train_test_split
+import joblib  # Import joblib pour l'enregistrement du modèle
 
 import mlflow
 import mlflow.sklearn
@@ -33,11 +31,14 @@ if __name__ == "__main__":
     np.random.seed(40)
 
     # Chargement des données
-    train_x = pd.read_csv('./data/X_train.csv')
-    train_y = pd.read_csv('./data/y_train.csv').values.ravel()
-    test_x = pd.read_csv('./data/X_test.csv')
-    test_y = pd.read_csv('./data/y_test.csv').values.ravel()
- 
+    try:
+        train_x = pd.read_csv('./data/X_train.csv')
+        train_y = pd.read_csv('./data/y_train.csv').values.ravel()
+        test_x = pd.read_csv('./data/X_test.csv')
+        test_y = pd.read_csv('./data/y_test.csv').values.ravel()
+    except Exception as e:
+        logger.error(f"Error loading data: {e}")
+        sys.exit(1)
 
     alpha = float(sys.argv[1]) if len(sys.argv) > 1 else 0.5
     l1_ratio = float(sys.argv[2]) if len(sys.argv) > 2 else 0.5
@@ -61,6 +62,14 @@ if __name__ == "__main__":
         mlflow.log_metric("r2", r2)
         mlflow.log_metric("mae", mae)
 
+        # Enregistrement du modèle avec joblib
+        models_dir = './models'
+        os.makedirs(models_dir, exist_ok=True)  # Créer le dossier models s'il n'existe pas
+        model_filename = os.path.join(models_dir, 'elasticnet_model.joblib')
+        joblib.dump(lr, model_filename)  # Enregistrer le modèle
+
+        print(f"Model saved to {model_filename}")
+
         predictions = lr.predict(train_x)
         signature = infer_signature(train_x, predictions)
 
@@ -68,10 +77,6 @@ if __name__ == "__main__":
 
         # Model registry does not work with file store
         if tracking_url_type_store != "file":
-            # Register the model
-            # There are other ways to use the Model Registry, which depends on the use case,
-            # please refer to the doc for more information:
-            # https://mlflow.org/docs/latest/model-registry.html#api-workflow
             mlflow.sklearn.log_model(
                 lr, "model", registered_model_name="ElasticnetWineModel", signature=signature
             )
