@@ -26,3 +26,9 @@ Le jeu de données se compose de plusieurs attributs (caractéristiques) qui dé
   Dioxyde de soufre libre (free sulfur dioxide) : Quantité de dioxyde de soufre libre dans le vin.
   
   Dioxyde de soufre total (total sulfur dioxide) : Quantité totale de dioxyde de soufre dans le vin.
+
+  # API
+  ![Image_api](https://github.com/user-attachments/assets/185030d7-eb15-463f-bcf2-a1834f4f94f1)
+
+
+  
