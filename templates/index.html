@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prédiction de la Qualité du Vin</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url('/static/photo_vin.jpg'); 
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #8b0000;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #a52a2a;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        #predictionResult {
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: #ffcc00;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            input[type="number"], button {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Prédiction de la Qualité du Vin</h1>
+        <form id="wineForm">
+            <label>Acidité fixe:</label>
+            <input type="number" step="any" name="fixed acidity" required>
+
+            <label>Acidité volatile:</label>
+            <input type="number" step="any" name="volatile acidity" required>
+
+            <label>Acide citrique:</label>
+            <input type="number" step="any" name="citric acid" required>
+
+            <label>Sucre résiduel:</label>
+            <input type="number" step="any" name="residual sugar" required>
+
+            <label>Chlorures:</label>
+            <input type="number" step="any" name="chlorides" required>
+
+            <label>Dioxyde de soufre libre:</label>
+            <input type="number" step="any" name="free sulfur dioxide" required>
+
+            <label>Dioxyde de soufre total:</label>
+            <input type="number" step="any" name="total sulfur dioxide" required>
+
+            <label>Densité:</label>
+            <input type="number" step="any" name="density" required>
+
+            <label>pH:</label>
+            <input type="number" step="any" name="pH" required>
+
+            <label>Sulfates:</label>
+            <input type="number" step="any" name="sulphates" required>
+
+            <label>Alcool:</label>
+            <input type="number" step="any" name="alcohol" required>
+
+            <button type="submit">Prédire</button>
+        </form>
+
+        <h2>Prédiction :</h2>
+        <p id="predictionResult">En attente de prédiction...</p>
+    </div>
+
+    <script>
+        document.getElementById('wineForm').addEventListener('submit', function(event) {
+            event.preventDefault();  // Empêche le rechargement de la page
+
+            // Récupérer les données du formulaire
+            const formData = new FormData(this);
+            const jsonData = {};
+
+            // Transformer les données en objet JSON
+            formData.forEach((value, key) => {
+                jsonData[key] = parseFloat(value);  // Assurez-vous que les valeurs sont converties en nombres
+            });
+
+            // Envoyer les données à l'API Flask
+            fetch('/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(jsonData),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    document.getElementById('predictionResult').innerHTML = "Erreur : " + data.error;
+                } else {
+                    document.getElementById('predictionResult').innerHTML = "Qualité du vin prédite : " + data.prediction;
+                }
+            })
+            .catch(error => {
+                document.getElementById('predictionResult').innerHTML = "Erreur lors de la prédiction : " + error;
+            });
+        });
+    </script>
+
+</body>
+</html>
+
