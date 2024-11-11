@@ -27,6 +27,31 @@ Le jeu de données se compose de plusieurs attributs (caractéristiques) qui dé
   
   Dioxyde de soufre total (total sulfur dioxide) : Quantité totale de dioxyde de soufre dans le vin.
 
+# Détails du dataset
+Nombre de lignes (observations) : Le dataset contient 1 599 lignes pour les vins rouges et 4 898 lignes pour les vins blancs.
+Nombre de colonnes (variables) : Il y a 12 caractéristiques pour les vins rouges et blancs, plus une colonne cible.
+
+Le jeu de données se compose de plusieurs attributs (caractéristiques) qui décrivent chaque vin, ainsi qu'une variable cible qui représente la qualité du vin. Voici un aperçu des caractéristiques typiques :
+
+
+  
+  Acidité volatile (volatile acidity) : Mesure de l'acide acétique dans le vin.
+  
+  Acidité fixe (fixed acidity) : Mesure des acides non volatils présents dans le vin.
+  
+  Acide citrique (citric acid) : Présence d'acide citrique dans le vin.
+  
+  Sucres résiduels (residual sugar) : Quantité de sucre restant après fermentation.
+  
+  Chlorures (chlorides) : Concentration de chlorures dans le vin.
+  
+  Dioxyde de soufre libre (free sulfur dioxide) : Quantité de dioxyde de soufre libre dans le vin.
+  
+# Target
+Nom de la target : quality
+Type de variable : C'est une variable numérique (discrète), représentant la qualité du vin.
+Plage de valeurs de la target : La qualité du vin est notée sur une échelle de 0 à 10, donc la target peut prendre des valeurs entre 0 et 10.
+
   # API
   ![Image_api](https://github.com/user-attachments/assets/185030d7-eb15-463f-bcf2-a1834f4f94f1)
 
